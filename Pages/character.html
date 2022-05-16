@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../scss/global.css">
+    <title>Rick and Morty wiki</title>
+    <script src="https://kit.fontawesome.com/f9060b67fc.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <main>
+        <header>
+            <input type="checkbox" name="" id="check">
+           <nav>
+               <div class="icon-image">
+                   <div class="image-container">
+                       <img src="../images/Logo.png" alt="">
+                   </div>
+               </div>
+              <div class="nav-search">
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search Character" aria-label="Search">
+                </form>
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link "  href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Characters</a>
+                    </li>
+                  </ul>
+                  <label for="check" class="bar">
+                    <span class="fa fa-bars" id="bars"></span>
+                    <span class="fa fa-times" id="times"></span>
+
+                </label>
+           </nav>
+        </header>
+        <section class="main-container">
+            <div class="card-section"></div>
+        </section>
+
+        <section class="pagination" aria-label="...">
+            <ul class="pagination">
+              <li class="page-item" id="previous">
+                <a class="page-link" href="#" tabindex="-1">Anterior</a>
+              </li>
+              <li class="page-item" id="next">
+                <a class="page-link" href="#">Siguiente</a>
+              </li>
+            </ul>
+          </section>
+    </main>
+    <script src="../js/index.js"></script>
+</body>
+</html>

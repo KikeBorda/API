@@ -1,0 +1,13 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  background: -webkit-gradient(linear, left top, right top, from(#020024), color-stop(0%, rgba(240, 225, 74, 0.885574)), color-stop(100%, #97ce4c), to(#0399d8));
+  background: linear-gradient(90deg, #020024 0%, rgba(240, 225, 74, 0.885574) 0%, #97ce4c 100%, #0399d8 100%);
+}
+/*# sourceMappingURL=main.css.map */

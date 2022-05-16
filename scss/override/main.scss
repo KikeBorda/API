@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(240,225,74, 0.8855742125951943) 0%,
+      rgba(151,206,76, 1) 100%,
+      rgba(3, 153, 216, 1) 100%
+    );
+}
