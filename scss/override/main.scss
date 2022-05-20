@@ -14,3 +14,27 @@ body {
       rgba(3, 153, 216, 1) 100%
     );
 }
+
+// .container-index{
+//   align-items: center;
+//   border-radius: 10px;
+//   box-sizing: border-box;
+//   display: -webkit-box;
+//   display: -ms-flexbox;
+//   display: flex;
+//   // flex-direction: column;
+//   margin: 10px;
+//   padding: 30px;
+// }
+
+.home{
+  display: grid;
+  padding: 9rem 0 2rem;
+  height: 100vh;
+}
+
+.home__container {
+  display: grid;
+  align-content: center;
+  row-gap: 2.5rem;
+}
