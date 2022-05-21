@@ -1,102 +1,125 @@
+//variables
 const cardSection = document.querySelector(".card-section");
 const previous = document.querySelector("#previous");
 const next = document.querySelector("#next");
+const search = document.querySelector("#search");
 const statusColor = {
   Alive: "#2C820A",
   Dead: "#C81717",
   unknown: "#343333",
 };
-
-let limit = 9;
 let offset = 1;
 
+//events
+
+//search event
+search.addEventListener("input", () => {
+  const nameSearch = search.value;
+  console.log(nameSearch);
+  if (nameSearch.length > 0) {
+    fetch(`https://rickandmortyapi.com/api/character/?name=${nameSearch}`)
+      .then((res) => res.json())
+      .then((data) => {
+        removeChildNodes(cardSection);
+        data.results.map((personaje) => {
+          return createCardCharacter(personaje);
+        });
+      })
+      .catch((err) => characterNotFound());
+  }
+  if (nameSearch == "") {
+    fetch(`https://rickandmortyapi.com/api/character`)
+      .then((res) => res.json())
+      .then((data) => {
+        removeChildNodes(cardSection);
+        data.results.map((personaje) => {
+          return createCardCharacter(personaje);
+        });
+      });
+  }
+});
+
+//previous page event
 previous.addEventListener("click", () => {
   if (offset != 1) {
-    offset -= 9;
-    removeChildNodes(cardSection);
-    fetchCharacters(offset, limit);
+    offset -= 1;
+    fetch(`https://rickandmortyapi.com/api/character/?page=${offset}`)
+      .then((res) => res.json())
+      .then((data) => {
+        removeChildNodes(cardSection);
+        data.results.map((personaje) => {
+          return createCardCharacter(personaje);
+        });
+      });
   }
 });
-
+//next page event
 next.addEventListener("click", () => {
-  offset += 9;
-  removeChildNodes(cardSection);
-  fetchCharacters(offset, limit);
-});
-
-function fetchCharacter(id) {
-  fetch(`https://rickandmortyapi.com/api/character/${id}`)
+  offset += 1;
+  fetch(`https://rickandmortyapi.com/api/character/?page=${offset}`)
     .then((res) => res.json())
-    .then((data) => createCardCharacter(data));
-}
+    .then((data) => {
+      removeChildNodes(cardSection);
+      data.results.map((personaje) => {
+        return createCardCharacter(personaje);
+      });
+    });
+});
+//functions
 
-function fetchCharacters(offset, limit) {
-  for (let i = offset; i < offset + limit; i++) {
-    fetchCharacter(i);
-  }
+//get all characters
+function fetchCharacter() {
+  fetch(`https://rickandmortyapi.com/api/character`)
+    .then((res) => res.json())
+    .then((data) =>
+      data.results.map((personaje) => {
+        return createCardCharacter(personaje);
+      })
+    );
 }
-
+//create card character
 function createCardCharacter(character) {
-  const setStatusColor = (status) => {
-    const color = statusColor[status];
-    statusCard.style.background = `${color}`;
-  };
   const card = document.createElement("article");
   card.classList.add("card-block");
 
-  const spriteContainer = document.createElement("div");
-  spriteContainer.classList.add("img-container");
+  const characterHTML = `
+    <div class="img-container">
+      <img src="${character.image}">
+      <span class="status" style="background:${
+        statusColor[character.status]
+      };">${character.status}</span>
+    </div>
+    <p class="name">${character.name}</p>
+    <div class="info-character">
+        <h3 class="title">Gender:</h3>
+        <p class="gender">${character.gender}</p>
+        <h3 class="title">Last known location:</h3>
+        <p class="location">${character.location.name}</p>
+    </div>
+  `;
+  card.innerHTML = characterHTML;
 
-  const sprite = document.createElement("img");
-  sprite.src = character.image;
-
-  const statusCard = document.createElement("span");
-  statusCard.classList.add("status");
-  statusCard.textContent = `${character.status}`;
-  setStatusColor(character.status);
-
-  spriteContainer.appendChild(sprite);
-  spriteContainer.appendChild(statusCard);
-
-  const infoCharacter = document.createElement("div");
-  infoCharacter.classList.add("info-character");
-
-  const name = document.createElement("p");
-  name.classList.add("name");
-  name.textContent = character.name;
-
-  const genderTitle = document.createElement("h3");
-  genderTitle.classList.add("title");
-  genderTitle.textContent = `Gender:`;
-
-  const gender = document.createElement("p");
-  gender.classList.add("gender");
-  gender.textContent = character.gender;
-
-  const locationTitle = document.createElement("h3");
-  locationTitle.classList.add("title");
-  locationTitle.textContent = `Last known location:`;
-
-  const location = document.createElement("p");
-  location.classList.add("location");
-  location.textContent = character.location.name;
-
-  infoCharacter.appendChild(genderTitle);
-  infoCharacter.appendChild(gender);
-  infoCharacter.appendChild(locationTitle);
-  infoCharacter.appendChild(location);
-
-  card.appendChild(spriteContainer);
-  card.appendChild(name);
-  card.appendChild(infoCharacter);
-
+  cardSection.classList.add("card-section");
   cardSection.appendChild(card);
 }
 
+//clean the HTML
 function removeChildNodes(parent) {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
 }
 
-fetchCharacters(offset, limit);
+const characterNotFound = () => {
+  removeChildNodes(cardSection);
+  const characterHTML = `
+    <article class="msg-not-found">
+     <h2>Character Not Found</h2>
+    </article>
+  `;
+  cardSection.classList.remove("card-section");
+  cardSection.innerHTML = characterHTML;
+};
+
+//START
+fetchCharacter();

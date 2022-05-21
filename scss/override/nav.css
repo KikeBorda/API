@@ -47,12 +47,12 @@ nav .icon-image img {
 }
 
 nav .navbar-nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   list-style-type: none;
   margin: auto 0;
   padding: 0;
@@ -164,20 +164,20 @@ nav .bar span {
         -ms-flex-direction: column;
             flex-direction: column;
     height: 0;
-    visibility: hidden;
     -webkit-transition: 0.3s;
     transition: 0.3s;
+    visibility: hidden;
   }
   nav .navbar-nav .nav-item {
-    text-align: center;
-    width: 100%;
-    transition: 0.3s -0.1s all;
     opacity: 0;
+    text-align: center;
+    transition: 0.3s -0.1s all;
+    width: 100%;
   }
   nav .navbar-nav .nav-item .nav-link {
     color: #000;
     display: block;
-    font-size: 28px;
+    font-size: 20px;
     padding: 25px;
   }
   nav .navbar-nav .nav-item:nth-child(1) {
@@ -189,14 +189,30 @@ nav .bar span {
             transform: translateX(-200px);
   }
   nav .bar {
+    cursor: pointer;
     display: block;
     position: absolute;
-    top: 20px;
     right: 80px;
-    cursor: pointer;
+    top: 20px;
   }
   nav .bar #times {
     display: none;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  nav .bar span {
+    font-size: 15px;
+  }
+  nav .bar {
+    right: 50px;
+    top: 30px;
+  }
+  nav .icon-image img {
+    width: 80%;
+  }
+  nav .navbar-nav .nav-item .nav-link {
+    font-size: 20px;
   }
 }
 
@@ -209,13 +225,13 @@ nav .bar span {
   }
   #check:checked ~ nav .navbar-nav {
     visibility: visible;
-    height: 185px;
+    height: auto;
   }
   #check:checked ~ nav .nav-item:nth-child(1),
   #check:checked ~ nav .nav-item:nth-child(2) {
+    opacity: 1;
     -webkit-transform: translateX(0);
             transform: translateX(0);
-    opacity: 1;
   }
 }
 
@@ -228,7 +244,7 @@ input[type="checkbox"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding-left: 0;
   list-style: none;
+  padding-left: 0;
 }
 /*# sourceMappingURL=nav.css.map */

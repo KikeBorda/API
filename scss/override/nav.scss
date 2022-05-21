@@ -135,7 +135,7 @@ nav{
             .navbar-nav .nav-item .nav-link{
                 color: #000;
                 display: block;
-                font-size: 28px;
+                font-size: 20px;
                 padding: 25px;
             }
             .navbar-nav .nav-item:nth-child(1){
@@ -155,9 +155,22 @@ nav{
             .bar #times{
                 display: none;
             }
+    }
+    @media screen and (max-width:350px) {
+        .bar span {
+            font-size: 15px;
+        }
+        .bar {
+            right: 50px;
+            top: 30px;
+        }
 
-            
-
+        .icon-image img {
+            width: 80%;
+        }
+        .navbar-nav .nav-item .nav-link{
+            font-size: 20px;
+        }
     }
 }
 @media screen and (max-width:1250px){
@@ -169,7 +182,7 @@ nav{
 }
 #check:checked ~ nav .navbar-nav{
     visibility: visible;
-    height: 185px;
+    height: auto;
 }
 #check:checked ~ nav .nav-item:nth-child(1),
 #check:checked ~ nav .nav-item:nth-child(2){
